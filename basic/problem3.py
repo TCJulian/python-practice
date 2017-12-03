@@ -25,13 +25,15 @@ def main():
     print("One-line objective")
     one_line(5, x)
     
+    print("Input List objective")
     z = input_list(x)
-    print("Input List objective\n", z, "\n")
+    print(z, "\n")
 
 def print_list(num, x):
     for i in x:
         if i < num:
             print(i)
+    print("")
 
 def new_list(num, x):
     y = []
