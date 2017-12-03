@@ -38,6 +38,8 @@ def mult_check():
             break
         except ValueError:
             pass
+        except ZeroDivisionError:
+            print("Division by zero. Please try again.\n")
 
 def odd_or_even(num):
     if num == 0:
