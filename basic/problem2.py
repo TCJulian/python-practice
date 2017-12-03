@@ -19,16 +19,25 @@ def main():
     mult_check()
 
 def get_number():
-    num = int(input("Give me a number:\n"))
-    return num
+    while True:
+        try:
+            num = int(input("Give me a number:\n"))
+            return num
+        except ValueError:
+            pass
 
 def mult_check():
-    num = int(input("Give me a number to check:\n"))
-    check = int(input("Give me a number to divide:\n"))
-    if num % check == 0:
-        print("{} divides evenly into {}".format(check, num))
-    else:
-        print("{} divided by {} leaves a remainder of {}".format(num, check, num % check))
+    while True:
+        try:
+            num = int(input("Give me a number to check:\n"))
+            check = int(input("Give me a number to divide:\n"))
+            if num % check == 0:
+                print("{} divides evenly into {}".format(check, num))
+            else:
+                print("{} divided by {} leaves a remainder of {}".format(num, check, num % check))
+            break
+        except ValueError:
+            pass
 
 def odd_or_even(num):
     if num == 0:
