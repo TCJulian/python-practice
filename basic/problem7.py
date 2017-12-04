@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 # 
-# Excercise from: http://www.practicepython.org/solution/2014/03/26/07-list-comprehensions-solutions.html
+# Excercise from: http://www.practicepython.org/exercise/2014/03/19/07-list-comprehensions.html
 # 
 # Initial Conditions:
 # a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
