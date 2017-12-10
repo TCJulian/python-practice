@@ -19,7 +19,7 @@ def ask_number():
             print("That is not a number. Please try again.")
 
 def is_prime(number):
-    if number == 0:
+    if number == (0 or 1):
         print(str(number) + " is not a prime number.")
         return False
     for i in range(2, number - 1):
