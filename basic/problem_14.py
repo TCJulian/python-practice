@@ -1,3 +1,13 @@
+# -------------------------------------------------------------------
+# 
+# Excercise from: http://www.practicepython.org/exercise/2014/05/15/14-list-remove-duplicates.html
+#
+# Objectives:
+# 1. Write a program that takes a list and returns a new list that contains all the elements of the first list minus all the duplicates.
+# 2. Write two different functions to do this - one using a loop and constructing a list, and another using sets.
+#
+# ------------------------------------------------------------------- 
+
 def combine_lists(list_1, list_2):
     new = set(list_1 + list_2)
     new = list(new)
