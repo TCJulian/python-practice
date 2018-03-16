@@ -1,14 +1,13 @@
 # -------------------------------------------------------------------
 # 
 # Excercise from: http://www.practicepython.org/exercise/2014/03/05/05-list-overlap.html
-
+#
 # Objectives:
 # 1. Write a program that returns a list that contains only the elements that are common between the lists (without duplicates). Make sure # your program works on two lists of different sizes.
 # 2. Randomly generate two lists to test this
 # 3. Write this in one line of Python (don’t worry if you can’t figure this out at this point - we’ll get to it soon)
 #
 # ------------------------------------------------------------------- 
-
 
 from random import randint
 
