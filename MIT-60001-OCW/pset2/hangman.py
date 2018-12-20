@@ -60,8 +60,8 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    words = list(secret_word)
-    for i in words:
+    word = list(secret_word)
+    for i in word:
         if i not in letters_guessed:
             return False
     return True 
@@ -73,8 +73,12 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    word = list(secret_word)
+    word_copy = word[:]
+    for index, i in enumerate(word):
+        if i not in letters_guessed:
+            word_copy[index] = "_ "
+    return "".join(word_copy)
 
 
 
@@ -203,9 +207,10 @@ if __name__ == "__main__":
     # uncomment the following two lines.
     
     #secret_word = choose_word(wordlist)
-    secret_word = "aped"
-    letters_guessed = ["a", "p", "e"]
+    secret_word = "apple"
+    letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
     print(is_word_guessed(secret_word, letters_guessed))
+    print(get_guessed_word(secret_word, letters_guessed))
     hangman(secret_word)
 
 ###############
