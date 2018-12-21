@@ -88,8 +88,11 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    letters = list(string.ascii_lowercase)
+    for i in letters_guessed:
+        if i in letters:
+            letters.remove(i)
+    return "".join(letters)
     
     
 
@@ -211,6 +214,7 @@ if __name__ == "__main__":
     letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
     print(is_word_guessed(secret_word, letters_guessed))
     print(get_guessed_word(secret_word, letters_guessed))
+    print(get_available_letters(letters_guessed))
     hangman(secret_word)
 
 ###############
