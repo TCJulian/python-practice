@@ -121,8 +121,27 @@ def hangman(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    guesses = 6
+    warnings = 3
+    letters_guessed = []
+    print("welcome to the game of Hangman!")
+    print("The secret word is", len(secret_word), "letters long.")
+    print("----------------")
+    while guesses > 0:
+        print("You have", guesses, "guesses.")
+        print("Available letters:", get_available_letters(letters_guessed))
+        guess = input("Please guess a letter: ")
+        if guess in secret_word and guess not in letters_guessed:
+            letters_guessed.append(guess)
+            print("That letter is in the secret word:", get_guessed_word(secret_word, letters_guessed))
+        else:
+            letters_guessed.append(guess)
+            print("Oops, that letter isn't in the secret word:", get_guessed_word(secret_word, letters_guessed))
+        if is_word_guessed(secret_word, letters_guessed):
+            break
+        print("----------------")
+        
+        
 
 
 
@@ -192,7 +211,6 @@ def hangman_with_hints(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
 
 
@@ -211,10 +229,10 @@ if __name__ == "__main__":
     
     #secret_word = choose_word(wordlist)
     secret_word = "apple"
-    letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
-    print(is_word_guessed(secret_word, letters_guessed))
-    print(get_guessed_word(secret_word, letters_guessed))
-    print(get_available_letters(letters_guessed))
+#    letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
+#    print(is_word_guessed(secret_word, letters_guessed))
+#    print(get_guessed_word(secret_word, letters_guessed))
+#    print(get_available_letters(letters_guessed))
     hangman(secret_word)
 
 ###############
