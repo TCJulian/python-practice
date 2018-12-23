@@ -124,22 +124,45 @@ def hangman(secret_word):
     guesses = 6
     warnings = 3
     letters_guessed = []
-    print("welcome to the game of Hangman!")
+    print("Welcome to the game of Hangman!")
     print("The secret word is", len(secret_word), "letters long.")
     print("----------------")
     while guesses > 0:
         print("You have", guesses, "guesses.")
+        print("You have", warnings, "warnings.")
         print("Available letters:", get_available_letters(letters_guessed))
-        guess = input("Please guess a letter: ")
+        guess = str.lower(input("Please guess a letter: "))
+        if not str.isalpha(guess):
+            if warnings > 0:
+                warnings -= 1
+                print("Oops, that is not an alphabetic character. You now have", warnings, "warnings.")
+            else:
+                guesses -= 1
         if guess in secret_word and guess not in letters_guessed:
             letters_guessed.append(guess)
-            print("That letter is in the secret word:", get_guessed_word(secret_word, letters_guessed))
+            print("Nice guess:", get_guessed_word(secret_word, letters_guessed))
+        elif guess in letters_guessed:
+            if warnings > 0:
+                warnings -= 1
+                print("You already guessed that letter. You now have", warnings, "warnings.")
+            else:
+                guesses -= 1
+                print("You already guessed that letter. You now have", guesses, "guesses.")
         else:
             letters_guessed.append(guess)
-            print("Oops, that letter isn't in the secret word:", get_guessed_word(secret_word, letters_guessed))
+            if guess in list('aeiou'):
+                guesses -= 2
+            else:
+                guesses -= 1
+            print("Wrong guess:", get_guessed_word(secret_word, letters_guessed))
+        print("----------------")
         if is_word_guessed(secret_word, letters_guessed):
             break
-        print("----------------")
+    if guesses > 0:
+        print("Congratulations, you won!")
+    else:
+        print("Aw, you couldn't guess my word! it was", secret_word)
+        
         
         
 
