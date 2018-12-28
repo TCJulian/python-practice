@@ -193,8 +193,21 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    hidden = []
+    my_word = my_word.replace(" ", "")
+    if len(my_word) != len(other_word):
+        return False
+    for index, c in enumerate(my_word):
+        match = other_word[index]
+        if c == "_":
+            if match not in hidden:
+                hidden.append(match)
+            continue
+        elif c == match and match not in hidden:
+            continue
+        else:
+            return False
+    return True
 
 
 
@@ -208,10 +221,15 @@ def show_possible_matches(my_word):
              that has already been revealed.
 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
-
+    matches = []
+    for word in wordlist:
+        if match_with_gaps(my_word, word):
+            matches.append(word)
+    if matches:
+        print(" ".join(matches))
+    else:
+        print("No matches found")
+    
 
 def hangman_with_hints(secret_word):
     '''
@@ -256,14 +274,17 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
     #secret_word = "else"
-    hangman(secret_word)
+    
+    #secret_word = choose_word(wordlist)
+    #hangman(secret_word)
 
 ###############
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
-    
+    show_possible_matches("t_ _ t")
+    show_possible_matches("abbbb_ ")
+    show_possible_matches("a_ pl_ ")
     #secret_word = choose_word(wordlist)
     #hangman_with_hints(secret_word)
