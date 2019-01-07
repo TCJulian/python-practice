@@ -176,7 +176,7 @@ def update_hand(hand, word):
     
     h_copy = hand.copy()
     for letter in word.lower():
-        if h_copy.get(letter) >= 2:
+        if h_copy.get(letter, 0) >= 2:
             h_copy[letter] -= 1
         else:
             h_copy.pop(letter)
@@ -196,6 +196,7 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
+    
     word = word.lower()
     h_copy = hand.copy()
     if word in word_list:
