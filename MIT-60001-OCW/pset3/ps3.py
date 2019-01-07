@@ -173,6 +173,7 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
+    
     h_copy = hand.copy()
     for letter in word.lower():
         if h_copy.get(letter) >= 2:
@@ -195,8 +196,16 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    word = word.lower()
+    h_copy = hand.copy()
+    if word in word_list:
+        for letter in word:
+            if h_copy.get(letter, 0) >= 1:
+                h_copy[letter] -= 1
+            else:
+                return False
+        return True
+    return False
 
 #
 # Problem #5: Playing a hand
