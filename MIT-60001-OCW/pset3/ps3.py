@@ -232,8 +232,8 @@ def calculate_handlen(hand):
     returns: integer
     """
     
-    pass  # TO DO... Remove this line when you implement this function
-
+    return sum(hand.values())
+    
 def play_hand(hand, word_list):
 
     """
