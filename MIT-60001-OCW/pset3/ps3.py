@@ -350,9 +350,24 @@ def substitute_hand(hand, letter):
     letter: string
     returns: dictionary (string -> int)
     """
+    h_copy = hand.copy()
+    vowels = [l for l in VOWELS if l not in hand.keys()]
+    consonants = [l for l in CONSONANTS if l not in hand.keys()]
     
-    pass  # TO DO... Remove this line when you implement this function
-       
+    # If the letter is the hand
+    if letter in hand.keys():
+    
+        # Replace the hand letter with a different, random letter from 
+        # its respective group that also isn't already in the hand.
+        if letter in VOWELS:
+            del h_copy[letter]
+            h_copy[random.choice(vowels)] = hand[letter]
+        elif letter in CONSONANTS:
+            del h_copy[letter]
+            h_copy[random.choice(consonants)] = hand[letter]
+            
+    # If letter not in hand, hand should remain the same.
+    return h_copy     
     
 def play_game(word_list):
     """
@@ -398,9 +413,11 @@ if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
     
+    print(substitute_hand({'h':1, 'e':1, 'l':2, 'o':3}, 'w'))
+    
     ### play_hand testing... ###
     #TEST 1
-    play_hand({'a':1, 'j':1, 'e':1, 'f':1, '*':1 , 'r':1, 'x':1}, word_list)
+    #play_hand({'a':1, 'j':1, 'e':1, 'f':1, '*':1 , 'r':1, 'x':1}, word_list)
     
     #TEST 2
-    play_hand({'a':1, 'c':1, 'f':1, 'i':1, '*':1 , 't':1, 'x':1}, word_list)
+    #play_hand({'a':1, 'c':1, 'f':1, 'i':1, '*':1 , 't':1, 'x':1}, word_list)
