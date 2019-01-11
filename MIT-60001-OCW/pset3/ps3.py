@@ -395,6 +395,9 @@ if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
     
+    ### play_hand testing... ###
+    #TEST 1
     play_hand({'a':1, 'j':1, 'e':1, 'f':1, '*':1 , 'r':1, 'x':1}, word_list)
-    #TEST 3
-    play_hand({'e':1}, word_list)
+    
+    #TEST 2
+    play_hand({'a':1, 'c':1, 'f':1, 'i':1, '*':1 , 't':1, 'x':1}, word_list)
