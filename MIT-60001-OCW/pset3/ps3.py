@@ -292,7 +292,7 @@ def play_hand(hand, word_list):
                 
                 # Tell the user how many points the word earned,
                 # and the updated total score
-                points = get_word_score(word, len(word))
+                points = get_word_score(word, len(hand))
                 score += points
                 print('"' + word + '" earned ' + str(points) + ' points.', end=" ")
                 print("Total:", score)
