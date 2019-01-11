@@ -182,7 +182,10 @@ def update_hand(hand, word):
         if h_copy.get(letter, 0) >= 2:
             h_copy[letter] -= 1
         else:
-            h_copy.pop(letter)
+            try:
+                h_copy.pop(letter)
+            except:
+                continue
     return h_copy
 
 #
