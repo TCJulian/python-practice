@@ -313,7 +313,11 @@ def play_hand(hand, word_list):
     # Game is over (user entered '!!' or ran out of letters),
     # so tell user the total score
     print()
-    print("Ran out of letters. Total score:", score)
+    if len(hand) == 0:
+        print("Ran out of letters. Total score for this hand:", score)
+    else:
+        print("Total score for this hand:", score)
+    print("----------")
     
     # Return the total score as result of function
     return score
@@ -362,11 +366,15 @@ def substitute_hand(hand, letter):
         if letter in VOWELS:
             del h_copy[letter]
             h_copy[random.choice(vowels)] = hand[letter]
+            
         elif letter in CONSONANTS:
             del h_copy[letter]
             h_copy[random.choice(consonants)] = hand[letter]
             
     # If letter not in hand, hand should remain the same.
+    else:
+        print("Letter provided not in current hand. No substitutions performed.")
+        
     return h_copy     
     
 def play_game(word_list):
@@ -400,9 +408,54 @@ def play_game(word_list):
     word_list: list of lowercase strings
     """
     
-    print("play_game not implemented.") # TO DO... Remove this line when you implement this function
+    # Ask user for how many rounds they want to play
+    while True:
+        try:
+            rounds = int(input("Enter total number of hands: "))
+            break
+        except:
+            print("Input must be an integer. Please try again.")
+            
+    # Keep track of total score, substitutes, and replays for entire match
+    total_score = 0
+    substitutes = 1
+    replays = 1
     
-
+    # Play each hand
+    for _ in range(rounds):
+    
+        # Deal and display hand
+        hand = deal_hand(HAND_SIZE)
+        print("Current hand: ", end="")
+        display_hand(hand)
+        
+        #Ask if user want to substitute a letter. Can only be done once.
+        if substitutes == 1:
+            sub = input("Would you like to substitute a letter? ").lower()
+            
+        
+            if sub in ('yes', 'y'):
+                letter_sub = input("Which letter would you like to replace: ").lower()
+                hand = substitute_hand(hand,letter_sub)
+                substitutes -= 1
+            else:
+                print()
+        
+        # Play hand. Offer to replay hand. Can only be done once.
+        while True:
+            score = play_hand(hand, word_list)
+            if replays == 1:
+                reply = input("Would you like to replay this hand? ").lower()
+                if reply in ('yes', 'y'):
+                    replays -= 1
+                    continue
+            break
+        
+        # Combine score from hand to total match score
+        total_score += score
+        
+    print("Total score over all hands:", total_score)
+            
 
 #
 # Build data structures used for entire session and play game
@@ -413,7 +466,8 @@ if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
     
-    print(substitute_hand({'h':1, 'e':1, 'l':2, 'o':3}, 'w'))
+    ### substitute_hand testing... ###
+    #print(substitute_hand({'h':1, 'e':1, 'l':2, 'o':1}, 'w'))
     
     ### play_hand testing... ###
     #TEST 1
