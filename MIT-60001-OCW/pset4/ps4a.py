@@ -23,14 +23,39 @@ def get_permutations(sequence):
     a different order than what is listed here.
     '''
 
-    pass #delete this line and replace with your code here
+    # Initialize list for storing permuntations
+    perms = []
+    if len(sequence) <= 1:
+        perms.append(sequence)
+        return perms
+    else:
+        letter = sequence[0]
+        for word in get_permutations(sequence[1:]):
+            for pos in range(len(word)+1):
+                word_c = list(word)
+                word_c.insert(pos,letter)
+                perms.append(''.join(word_c))
+        perms = list(set(perms))
+        perms.sort()
+        return perms
+        
 
 if __name__ == '__main__':
 #    #EXAMPLE
-#    example_input = 'abc'
-#    print('Input:', example_input)
-#    print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
-#    print('Actual Output:', get_permutations(example_input))
+    example_input1 = 'ab'
+    print('Input:', example_input1)
+    print('Expected Output:', ['ab','ba'])
+    print('Actual Output:', get_permutations(example_input1))
+    
+    example_input2 = 'abc'
+    print('Input:', example_input2)
+    print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    print('Actual Output:', get_permutations(example_input2))
+    
+    example_input3 = 'zoo'
+    print('Input:', example_input3)
+    #print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    print('Actual Output:', get_permutations(example_input3))
     
 #    # Put three example test cases here (for your sanity, limit your inputs
 #    to be three characters or fewer as you will have n! permutations for a 
