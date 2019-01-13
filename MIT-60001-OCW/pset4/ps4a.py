@@ -54,12 +54,11 @@ if __name__ == '__main__':
     
     example_input3 = 'zoo'
     print('Input:', example_input3)
-    #print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    print('Expected Output:', ['ooz', 'ozo', 'zoo'])
     print('Actual Output:', get_permutations(example_input3))
     
 #    # Put three example test cases here (for your sanity, limit your inputs
 #    to be three characters or fewer as you will have n! permutations for a 
 #    sequence of length n)
 
-    pass #delete this line and replace with your code here
 
