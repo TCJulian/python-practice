@@ -128,7 +128,7 @@ class Message(object):
         mapping = self.build_shift_dict(shift)
         new_message = ''
         for letter in self.message_text:
-            new_message += mapping[letter]
+            new_message += mapping.get(letter, letter)
         return new_message
             
 
@@ -202,7 +202,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -227,7 +227,7 @@ if __name__ == '__main__':
 #    message = Message("hello")
 #    print(message.apply_shift(1))
 #    #Example test case (PlaintextMessage)
-    plaintext = PlaintextMessage('hello', 2)
+    plaintext = PlaintextMessage('Hello there!', 2)
     print('Expected Output: jgnnq')
     print('Actual Output:', plaintext.get_message_text_encrypted())
 #
