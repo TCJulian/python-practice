@@ -69,8 +69,9 @@ class Message(object):
         a Message object has two attributes:
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
-        '''
-        pass #delete this line and replace with your code here
+        '''        
+        self.message_text = text
+        self.valid_words = load_words(WORDLIST_FILENAME)
 
     def get_message_text(self):
         '''
@@ -78,7 +79,7 @@ class Message(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +88,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words[:]
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +104,14 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        upper = string.ascii_uppercase
+        lower = string.ascii_lowercase
+        mapping = dict()
+        for index, letter in enumerate(upper):
+            mapping[letter] = upper[(index+shift)%26]
+        for index, letter in enumerate(lower):
+            mapping[letter] = lower[(index+shift)%26]
+        return mapping
 
     def apply_shift(self, shift):
         '''
@@ -117,7 +125,12 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        mapping = self.build_shift_dict(shift)
+        new_message = ''
+        for letter in self.message_text:
+            new_message += mapping[letter]
+        return new_message
+            
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -207,6 +220,8 @@ class CiphertextMessage(Message):
 
 if __name__ == '__main__':
 
+    message = Message("hello")
+    print(message.apply_shift(1))
 #    #Example test case (PlaintextMessage)
 #    plaintext = PlaintextMessage('hello', 2)
 #    print('Expected Output: jgnnq')
