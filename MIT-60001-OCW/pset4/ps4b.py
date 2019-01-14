@@ -220,24 +220,48 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        best_shift = ('',)
+        word_n = 0
+        for shift in range(26):
+            new_message = self.apply_shift(shift)
+            for word in new_message.split(' '):
+                n = 0
+                if is_word(self.valid_words, word):
+                    n += 1
+            if n > word_n:
+                best_shift = (shift, new_message)
+        return best_shift
 
 if __name__ == '__main__':
 
-#    message = Message("hello")
-#    print(message.apply_shift(1))
 #    #Example test case (PlaintextMessage)
     plaintext = PlaintextMessage('Hello there!', 2)
     print('Expected Output: jgnnq')
     print('Actual Output:', plaintext.get_message_text_encrypted())
 #
 #    #Example test case (CiphertextMessage)
-#    ciphertext = CiphertextMessage('jgnnq')
-#    print('Expected Output:', (24, 'hello'))
-#    print('Actual Output:', ciphertext.decrypt_message())
+    ciphertext = CiphertextMessage('jgnnq')
+    print('Expected Output:', (24, 'hello'))
+    print('Actual Output:', ciphertext.decrypt_message())
 
     #TODO: WRITE YOUR TEST CASES HERE
-
-    #TODO: best shift value and unencrypted story 
+    plaintext = PlaintextMessage('Tyler Julian', 5)
+    print('Expected Output: Ydqjw Ozqnfs')
+    print('Actual Output:', plaintext.get_message_text_encrypted())
     
+    plaintext = PlaintextMessage('Hello there!', 2)
+    print('Expected Output: Jgnnq vjgtg!')
+    print('Actual Output:', plaintext.get_message_text_encrypted())
+    
+    ciphertext = CiphertextMessage('nonsense')
+    print('Expected Output:', (0, 'nonsense'))
+    print('Actual Output:', ciphertext.decrypt_message())
+    
+    ciphertext = CiphertextMessage('Ydqjw Ozqnfs')
+    print('Expected Output:', (21, 'Tyler Julian'))
+    print('Actual Output:', ciphertext.decrypt_message())
+    
+    #TODO: best shift value and unencrypted story 
+    ciphertext = CiphertextMessage(get_story_string())
+    print('Output:', ciphertext.decrypt_message())
     pass #delete this line and replace with your code here
