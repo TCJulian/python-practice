@@ -143,7 +143,7 @@ class EncryptedSubMessage(SubMessage):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -163,7 +163,19 @@ class EncryptedSubMessage(SubMessage):
         
         Hint: use your function from Part 4A
         '''
-        pass #delete this line and replace with your code here
+        best_perms = ''
+        perms = get_permutations(VOWELS_LOWER)
+        word_n = 0
+        for perm in perms:
+            new_message = self.apply_transpose(self.build_transpose_dict(perm))
+            n = 0
+            for word in new_message.split(' '):
+                if is_word(self.valid_words, word):
+                    n += 1
+            if n > word_n:
+                word_n = n
+                best_perms = new_message
+        return best_perms
     
 
 if __name__ == '__main__':
@@ -172,11 +184,36 @@ if __name__ == '__main__':
     message = SubMessage("Hello World!")
     permutation = "eaiuo"
     enc_dict = message.build_transpose_dict(permutation)
-    print(enc_dict)
     print("Original message:", message.get_message_text(), "Permutation:", permutation)
     print("Expected encryption:", "Hallu Wurld!")
     print("Actual encryption:", message.apply_transpose(enc_dict))
     enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
     print("Decrypted message:", enc_message.decrypt_message())
      
-    #TODO: WRITE YOUR TEST CASES HERE
+    # Example test case 2
+    message = SubMessage("The sun will set on the fifth of December.")
+    permutation = "iouae"
+    enc_dict = message.build_transpose_dict(permutation)
+    print("Original message:", message.get_message_text(), "Permutation:", permutation)
+    print("Expected encryption:", "Thu sin wall sut en thu fafth ef Ducumbur")
+    print("Actual encryption:", message.apply_transpose(enc_dict))
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    print("Decrypted message:", enc_message.decrypt_message())
+
+    # Example test case 3
+    message = SubMessage("""
+        There once was a man from Peru, who dreamt he was eating his shoe. 
+        He woke with a fright, in the middle of the night 
+        and found out that his dream had come true.
+        """)
+    permutation = "eouia"
+    enc_dict = message.build_transpose_dict(permutation)
+    print("Original message:", message.get_message_text(), "Permutation:", permutation)
+    print("Expected encryption:", """
+          Thara enca wus u mun frem Pari, whe draumt ha wus autong hos shea. 
+          Ha weka woth u froght, on tha moddla ef tha noght 
+          und feind eit thut hos draum hud cema tria.
+          """)
+    print("Actual encryption:", message.apply_transpose(enc_dict))
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    print("Decrypted message:", enc_message.decrypt_message())
