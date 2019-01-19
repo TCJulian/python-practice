@@ -224,12 +224,13 @@ class CiphertextMessage(Message):
         word_n = 0
         for shift in range(26):
             new_message = self.apply_shift(shift)
+            n = 0
             for word in new_message.split(' '):
-                n = 0
                 if is_word(self.valid_words, word):
                     n += 1
             if n > word_n:
                 best_shift = (shift, new_message)
+                word_n = n
         return best_shift
 
 if __name__ == '__main__':
