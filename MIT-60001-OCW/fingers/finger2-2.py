@@ -1,27 +1,20 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec  3 12:20:19 2018
+### Finger 2-2 ###
+# Write a program that examines three variables—x, y, and z—
+# and prints the largest odd number among them. If none of them are odd, it
+# should print a message to that effect.
 
-@author: Tyler
-"""
+x = int(input("Enter x:"))
+y = int(input("Enter y:"))
+z = int(input("Enter z:"))
 
-x = int(input("x = "))
-y = int(input("y = "))
-z = int(input("z = "))
+odd = []
 
-if x%2 != 0:
-    if not max_odd or x > max_odd:
-        max_odd = x
-        
-if y%2 != 0:
-    if not max_odd or y > max_odd:
-        max_odd = y
-        
-if z%2 != 0:
-    if not max_odd or z > max_odd:
-        max_odd = z
-        
-if max_odd:
-    print(max_odd)
+for i in [x,y,z]:
+    if i%2 != 0:
+        odd.append(i)
+
+if len(odd) > 0:
+    print(f"The largest odd number is {max(odd)}.")
 else:
-    print("All values are even.")
+    print("No variables are odd.")
+    
