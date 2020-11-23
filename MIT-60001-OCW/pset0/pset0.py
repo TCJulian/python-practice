@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import math
 
-x = int(input("Enter number x: "))
-y = int(input("Enter number y: "))
-print("X**y = ", x**y)
-print("log(x) = ", int(math.log(x,2)))
+x = int(input("Enter number x:"))
+y = int(input("Enter number y:"))
+
+print(f"x**y = {x**y}")
+print(f"log(x) = {math.log(x, 2)}")
