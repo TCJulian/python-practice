@@ -1,14 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 12 16:07:09 2018
+def isIn (a,b):
+    """Compares two strings to see if one is in the other"""
+    return a in b or b in a
 
-@author: Tyler
-"""
-
-def isIn(string1, string2):
-    if string1 in string2 or string2 in string1:
-        return True
-    else:
-        return False
-    
-print(isIn("hello", "el"))
+print(isIn("bin", "robbin"))
+print(isIn("fast", "slow"))
+print(isIn("racecar", "racecar"))
