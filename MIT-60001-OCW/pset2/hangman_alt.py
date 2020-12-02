@@ -143,7 +143,7 @@ def hangman(secret_word):
     print(f"I am thinking of a word that is {len(secret_word)} letters long.")
     print("----------")
 
-    while guesses > 0 and warning > 0:
+    while guesses > 0 and warnings > 0:
         print(f"You have {guesses} guess(es) left.")
         print(f"Available letters: {get_available_letters(letters_guessed)}")
         guessed_letter = input("Please guess a letter: ")
