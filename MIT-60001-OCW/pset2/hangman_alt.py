@@ -93,7 +93,22 @@ def get_available_letters(letters_guessed):
         if letter not in letters_guessed:
             remaining_letters += letter
     return remaining_letters
-    
+
+
+def calculate_total_score(secret_word, guesses):
+    '''
+    secret_word: string, the word the user is guessing
+    guesses: the total number of guesses the user has left in the current game
+    returns: an int that represents the total score for the game. This is calulated
+        using the the number of guesses remaining times the number of unique
+        characters in the secret word.
+    '''
+    unique_letters = ""
+    for letter in secret_word:
+        if letter not in unique_letters:
+            unique_letters += letter
+    return guesses * len(unique_letters)
+
 
 def hangman(secret_word):
     '''
