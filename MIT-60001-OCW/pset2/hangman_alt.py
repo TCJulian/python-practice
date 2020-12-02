@@ -175,7 +175,7 @@ def hangman(secret_word):
             elif guessed_letter in "aeiou":
                 guesses -=2
         print("----------")
-        if guessed_word == secret_word:
+        if get_guessed_word(secret_word, letters_guessed) == secret_word:
             break
 
     if guesses <= 0:
