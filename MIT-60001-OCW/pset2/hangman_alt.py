@@ -151,17 +151,19 @@ def hangman(secret_word):
         if not guessed_letter.isalpha():
             if warnings > 0:
                 warnings -= 1
+                print(f"Oops! That is not a valid letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
             else:
                 guesses -= 1
-            print(f"Oops! That is not a valid letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
+                print(f"Oops! That is not a valid letter. You have no warnings left, so you lose one guess: {get_guessed_word(secret_word, letters_guessed)}")
             continue
 
         if guessed_letter in letters_guessed:
             if warnings > 0:
                 warnings -= 1
+                print(f"Oops! You have already guessed that letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
             else:
                 guesses -= 1
-            print(f"Oops! You have already guessed that letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
+                print(f"Oops! You have already guessed that letter. You have no warnings left, so you lose one guess: {get_guessed_word(secret_word, letters_guessed)}")
             continue
 
         letters_guessed.append(guessed_letter.lower())
