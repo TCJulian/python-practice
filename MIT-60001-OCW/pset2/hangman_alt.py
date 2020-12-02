@@ -182,6 +182,7 @@ def hangman(secret_word):
         print(f"Sorry, you ran out of guesses! The secret word was: {secret_word}")
     else:
         print(f"Congratulations, you won!")
+        print(f"Your total score for this game is: {calculate_total_score(secret_word, guesses)}")
 
 
 
