@@ -142,7 +142,7 @@ def hangman(secret_word):
     print("Welcome to the game Hangman!")
     print(f"I am thinking of a word that is {len(secret_word)} letters long.")
 
-    while guesses > 0 and warnings > 0:
+    while guesses > 0:
         print("----------")
         print(f"You have {guesses} guess(es) left.")
         print(f"Available letters: {get_available_letters(letters_guessed)}")
