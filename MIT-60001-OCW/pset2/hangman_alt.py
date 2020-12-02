@@ -159,6 +159,8 @@ def hangman(secret_word):
                     f"{get_guessed_word(secret_word, letters_guessed)}")
             continue
 
+        guessed_letter = guessed_letter.lower()
+
         if guessed_letter in letters_guessed:
             if warnings > 0:
                 warnings -= 1
