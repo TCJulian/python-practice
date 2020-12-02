@@ -141,9 +141,9 @@ def hangman(secret_word):
 
     print("Welcome to the game Hangman!")
     print(f"I am thinking of a word that is {len(secret_word)} letters long.")
-    print("----------")
 
     while guesses > 0 and warnings > 0:
+        print("----------")
         print(f"You have {guesses} guess(es) left.")
         print(f"Available letters: {get_available_letters(letters_guessed)}")
         guessed_letter = input("Please guess a letter: ")
@@ -166,7 +166,7 @@ def hangman(secret_word):
 
         letters_guessed.append(guessed_letter.lower())
 
-        if is_word_guessed(secret_word, letters_guessed):
+        if guessed_letter in secret_word:
             print(f"Good guess: {get_guessed_word(secret_word, letters_guessed)}")
         else:
             print(f"Oops! That letter is not in my word: {get_guessed_word(secret_word, letters_guessed)}")
@@ -174,8 +174,8 @@ def hangman(secret_word):
                 guesses -= 1
             elif guessed_letter in "aeiou":
                 guesses -=2
-        print("----------")
-        if get_guessed_word(secret_word, letters_guessed) == secret_word:
+
+        if is_word_guessed(secret_word, letters_guessed):
             break
 
     if guesses <= 0:
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
+    secret_word = "apple" #choose_word(wordlist)
     hangman(secret_word)
 
 ###############
