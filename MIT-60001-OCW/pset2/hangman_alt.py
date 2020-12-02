@@ -1,14 +1,9 @@
 # Problem Set 2, hangman.py
-# Name: 
-# Collaborators:
-# Time spent:
 
 # Hangman Game
 # -----------------------------------
 # Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
+
 import random
 import string
 
@@ -18,7 +13,7 @@ WORDLIST_FILENAME = "words.txt"
 def load_words():
     """
     Returns a list of valid words. Words are strings of lowercase letters.
-    
+
     Depending on the size of the word list, this function may
     take a while to finish.
     """
@@ -37,7 +32,7 @@ def load_words():
 def choose_word(wordlist):
     """
     wordlist (list): list of words (strings)
-    
+
     Returns a word from wordlist at random
     """
     return random.choice(wordlist)
@@ -113,26 +108,26 @@ def calculate_total_score(secret_word, guesses):
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
-    
+
     Starts up an interactive game of Hangman.
-    
-    * At the start of the game, let the user know how many 
+
+    * At the start of the game, let the user know how many
       letters the secret_word contains and how many guesses s/he starts with.
-      
+
     * The user should start with 6 guesses
 
     * Before each round, you should display to the user how many guesses
       s/he has left and the letters that the user has not yet guessed.
-    
+
     * Ask the user to supply one guess per round. Remember to make
       sure that the user puts in a letter!
-    
-    * The user should receive feedback immediately after each guess 
+
+    * The user should receive feedback immediately after each guess
       about whether their guess appears in the computer's word.
 
-    * After each guess, you should display to the user the 
+    * After each guess, you should display to the user the
       partially guessed word so far.
-    
+
     Follows the other limitations detailed in the problem write-up.
     '''
     letters_guessed = []
@@ -152,19 +147,31 @@ def hangman(secret_word):
         if not guessed_letter.isalpha():
             if warnings > 0:
                 warnings -= 1
-                print(f"Oops! That is not a valid letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
+                print(
+                    "Oops! That is not a valid letter. "
+                    f"You have {warnings} warnings left: "
+                    f"{get_guessed_word(secret_word, letters_guessed)}")
             else:
                 guesses -= 1
-                print(f"Oops! That is not a valid letter. You have no warnings left, so you lose one guess: {get_guessed_word(secret_word, letters_guessed)}")
+                print(
+                    "Oops! That is not a valid letter. "
+                    "You have no warnings left, so you lose one guess: "
+                    f"{get_guessed_word(secret_word, letters_guessed)}")
             continue
 
         if guessed_letter in letters_guessed:
             if warnings > 0:
                 warnings -= 1
-                print(f"Oops! You have already guessed that letter. You have {warnings} warnings left: {get_guessed_word(secret_word, letters_guessed)}")
+                print(
+                    "Oops! You have already guessed that letter. "
+                    f"You have {warnings} warnings left: "
+                    f"{get_guessed_word(secret_word, letters_guessed)}")
             else:
                 guesses -= 1
-                print(f"Oops! You have already guessed that letter. You have no warnings left, so you lose one guess: {get_guessed_word(secret_word, letters_guessed)}")
+                print(
+                    "Oops! You have already guessed that letter. "
+                    "You have no warnings left, so you lose one guess: "
+                    f"{get_guessed_word(secret_word, letters_guessed)}")
             continue
 
         letters_guessed.append(guessed_letter.lower())
@@ -172,7 +179,9 @@ def hangman(secret_word):
         if guessed_letter in secret_word:
             print(f"Good guess: {get_guessed_word(secret_word, letters_guessed)}")
         else:
-            print(f"Oops! That letter is not in my word: {get_guessed_word(secret_word, letters_guessed)}")
+            print(
+                "Oops! That letter is not in my word: "
+                f"{get_guessed_word(secret_word, letters_guessed)}")
             if guessed_letter in "bcdfghjklmnpqrstvwxyz":
                 guesses -= 1
             elif guessed_letter in "aeiou":
@@ -186,7 +195,7 @@ def hangman(secret_word):
         print(f"Sorry, you ran out of guesses! The secret word was: {secret_word}")
     else:
         print("----------")
-        print(f"Congratulations, you won!")
+        print("Congratulations, you won!")
         print(f"Your total score for this game is: {calculate_total_score(secret_word, guesses)}")
 
 
