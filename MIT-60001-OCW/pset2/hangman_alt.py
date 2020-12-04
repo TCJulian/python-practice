@@ -221,9 +221,17 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    my_word = my_word.replace(' ', '')
+    if len(my_word) != len(other_word):
+        return False
 
+    for position, letter in enumerate(my_word):
+        secret_letter = other_word[position]
+        if secret_letter == letter or (letter == '_' and secret_letter not in my_word):
+            continue
+        else:
+            return False
+    return True
 
 
 def show_possible_matches(my_word):
