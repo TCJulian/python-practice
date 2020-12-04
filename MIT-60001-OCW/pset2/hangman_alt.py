@@ -299,6 +299,11 @@ def hangman_with_hints(secret_word):
         print(f"Available letters: {get_available_letters(letters_guessed)}")
         guessed_letter = input("Please guess a letter: ")
 
+        if guessed_letter == "*":
+            print("Possible word matches are:")
+            show_possible_matches(get_guessed_word(secret_word, letters_guessed))
+            continue
+
         if not guessed_letter.isalpha():
             if warnings > 0:
                 warnings -= 1
