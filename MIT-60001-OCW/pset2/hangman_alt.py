@@ -244,9 +244,18 @@ def show_possible_matches(my_word):
              that has already been revealed.
 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    possible_matches = []
 
+    for word in wordlist:
+        if match_with_gaps(my_word, word):
+            possible_matches.append(word)
+
+    if len(possible_matches) > 0:
+        for match in possible_matches:
+            print(match, end=" ")
+        print("")
+    else:
+        print("No matches found")
 
 
 def hangman_with_hints(secret_word):
