@@ -240,10 +240,7 @@ def calculate_handlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    handlen = 0
-    for v in hand.values():
-        handlen += v
-    return handlen
+    return sum(hand.values())
     
 
 def play_hand(hand, word_list):
