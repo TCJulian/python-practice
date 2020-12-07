@@ -1,4 +1,4 @@
-from ps3 import *
+from pset3_alt import *
 
 #
 # Test code
