@@ -1,3 +1,5 @@
+from unittest import mock
+
 from pset3_alt import *
 
 #
@@ -247,6 +249,23 @@ def test_wildcard(word_list):
     if not failure:
         print("SUCCESS: test_wildcard()")
 
+def test_hand(word_list):
+    """Unit test for play_hand"""
+    failure = False
+
+    # test 1
+    hand = {'a': 1, 'j': 1, 'e': 1, 'f': 1, '*': 1, 'r':1, 'x':1 }
+    words = {"jar":90, "f*x":216, "!!":0}
+
+    with mock.patch('builtins.input', side_effect=words.keys()):
+        assert play_hand(hand, word_list) == 306
+
+    # test 2
+    hand = {'a': 1, 'c': 1, 'f': 1, 'i': 1, '*': 1, 't':1, 'x':1 }
+    words = {"fix":117, "ac":0, "*t":14}
+    with mock.patch('builtins.input', side_effect=words.keys()):
+        assert play_hand(hand, word_list) == 131
+
 
 word_list = load_words()
 print("----------------------------------------------------------------------")
@@ -261,4 +280,7 @@ test_is_valid_word(word_list)
 print("----------------------------------------------------------------------")
 print("Testing wildcards...")
 test_wildcard(word_list)
+print("----------------------------------------------------------------------")
+print("Testing play_hand...")
+test_hand(word_list)
 print("All done!")
