@@ -327,10 +327,28 @@ def substitute_hand(hand, letter):
     letter: string
     returns: dictionary (string -> int)
     """
-    
-    pass  # TO DO... Remove this line when you implement this function
-       
-    
+    sub_hand = hand.copy()
+
+    if letter not in sub_hand or letter == "*":
+        return sub_hand
+
+    if letter in CONSONANTS:
+        valid = False
+        while not valid:
+            new_letter = random.choice(CONSONANTS)
+            if new_letter not in sub_hand:
+                valid = True
+    elif letter in VOWELS:
+        valid = False
+        while not valid:
+            new_letter = random.choice(VOWELS)
+            if new_letter not in sub_hand:
+                valid = True
+
+    sub_hand[new_letter] = sub_hand.pop(letter)
+    return sub_hand
+
+
 def play_game(word_list):
     """
     Allow the user to play a series of hands
