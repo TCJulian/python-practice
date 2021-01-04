@@ -19,8 +19,24 @@ def get_permutations(sequence):
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
     '''
+    permutations = []
 
-    pass #delete this line and replace with your code here
+    if len(sequence) <= 0:
+        return permutations
+    elif len(sequence) == 1:
+        permutations.append(sequence)
+        return permutations
+    else:
+        char = sequence[0]
+        for word in get_permutations(sequence[1:]):
+            for pos in range(len(word)+1):
+                sub_word = list(word)
+                sub_word.insert(pos, char)
+                sub_word = "".join(sub_word)
+                if sub_word not in permutations:
+                    permutations.append(sub_word)
+    return permutations
+
 
 if __name__ == '__main__':
 #    #EXAMPLE
