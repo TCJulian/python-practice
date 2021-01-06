@@ -58,6 +58,7 @@ def get_story_string():
 ### END HELPER CODE ###
 
 WORDLIST_FILENAME = 'words.txt'
+WORDLIST = load_words(WORDLIST_FILENAME)
 
 class Message(object):
     def __init__(self, text):
@@ -70,7 +71,9 @@ class Message(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+
+        self.message_text = text
+        self.valid_words = [word for word in text.split() if is_word(WORDLIST, word)]
 
     def get_message_text(self):
         '''
@@ -78,7 +81,7 @@ class Message(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +90,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words[:]
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +106,25 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        try:
+            assert 0 <= shift < 26
+        except:
+            raise AssertionError("Shift must be between 0 and 26 inclusive.")
+
+        shift_dict = {}
+        ascii_letters = [char for char in string.ascii_letters]
+        for pos, letter in enumerate(ascii_letters):
+            if pos <= 25:
+                if pos + shift > 25:
+                    shift_dict[letter] = ascii_letters[(pos+shift) % 26]
+                else:
+                    shift_dict[letter] = ascii_letters[pos + shift]
+            elif pos >= 26:
+                if pos + shift > 51:
+                    shift_dict[letter] = ascii_letters[(pos+shift) % 26 + 26]
+                else:
+                    shift_dict[letter] = ascii_letters[pos + shift]
+        return shift_dict
 
     def apply_shift(self, shift):
         '''
@@ -117,7 +138,16 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        shifted_text = ""
+        shift_dict = self.build_shift_dict(shift)
+        ascii_letters = string.ascii_letters
+        for word in [char for char in self.message_text]:
+            for char in word:
+                if char in ascii_letters:
+                    shifted_text += shift_dict[char]
+                else:
+                    shifted_text += char
+        return shifted_text
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -221,4 +251,26 @@ if __name__ == '__main__':
 
     #TODO: best shift value and unencrypted story 
     
-    pass #delete this line and replace with your code here
+    test1 = Message("abcdef")
+    print(test1.get_message_text())
+    print(test1.get_valid_words())
+    print(test1.build_shift_dict(2))
+    print(test1.apply_shift(2))
+
+    test2 = Message("Hello, World!")
+    print(test2.get_message_text())
+    print(test2.get_valid_words())
+    print(test2.build_shift_dict(4))
+    print(test2.apply_shift(4))
+
+    test3 = Message("")
+    print(test3.get_message_text())
+    print(test3.get_valid_words())
+    print(test3.build_shift_dict(1))
+    print(test3.apply_shift(1))
+
+    test4 = Message("I can't get up.")
+    print(test4.get_message_text())
+    print(test4.get_valid_words())
+    print(test4.build_shift_dict(1))
+    print(test4.apply_shift(30))
