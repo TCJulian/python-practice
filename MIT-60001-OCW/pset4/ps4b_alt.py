@@ -219,7 +219,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -237,7 +237,15 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        best_decrypt = 0
+        result = None
+        for shift in range(26):
+            decrypt_attempt = Message(self.apply_shift(shift))
+            if len(decrypt_attempt.get_valid_words()) > best_decrypt:
+                best_decrypt = len(decrypt_attempt.get_valid_words())
+                result = (shift, decrypt_attempt.get_message_text())
+        return result
+
 
 if __name__ == '__main__':
 
@@ -247,11 +255,9 @@ if __name__ == '__main__':
     print('Actual Output:', plaintext.get_message_text_encrypted())
 #
 #    #Example test case (CiphertextMessage)
-#    ciphertext = CiphertextMessage('jgnnq')
-#    print('Expected Output:', (24, 'hello'))
-#    print('Actual Output:', ciphertext.decrypt_message())
-
-    #TODO: WRITE YOUR TEST CASES HERE
+    ciphertext = CiphertextMessage('jgnnq')
+    print('Expected Output:', (24, 'hello'))
+    print('Actual Output:', ciphertext.decrypt_message())
 
     #TODO: best shift value and unencrypted story 
     
