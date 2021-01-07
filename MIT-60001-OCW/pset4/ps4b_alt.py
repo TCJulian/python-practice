@@ -259,8 +259,6 @@ if __name__ == '__main__':
     print('Expected Output:', (24, 'hello'))
     print('Actual Output:', ciphertext.decrypt_message())
 
-    #TODO: best shift value and unencrypted story 
-    
     test1 = Message("abcdef")
     print("Test 1")
     print(test1.get_message_text())
@@ -301,3 +299,11 @@ if __name__ == '__main__':
     print(test5.change_shift(3))
     print(test5.get_message_text_encrypted())
     print()
+
+    # best shift value and unencrypted story
+    print("Final test: Story decryption")
+    message_file = open("story.txt", 'r')
+    for line in message_file:
+        encrypted_message =  CiphertextMessage(line)
+    print("Encrypted message: ", encrypted_message.get_message_text())
+    print("Decrypted message and shift: ", encrypted_message.decrypt_message())
