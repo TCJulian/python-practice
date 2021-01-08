@@ -52,6 +52,7 @@ def is_word(word_list, word):
 ### END HELPER CODE ###
 
 WORDLIST_FILENAME = 'words.txt'
+WORDLIST = load_words(WORDLIST_FILENAME)
 
 # you may find these constants helpful
 VOWELS_LOWER = 'aeiou'
@@ -70,7 +71,6 @@ class SubMessage(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        WORDLIST = load_words(WORDLIST_FILENAME)
         self.message_text = text
         self.valid_words = [word for word in text.split() if is_word(WORDLIST, word)]
     
@@ -138,7 +138,7 @@ class EncryptedSubMessage(SubMessage):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -158,7 +158,15 @@ class EncryptedSubMessage(SubMessage):
         
         Hint: use your function from Part 4A
         '''
-        pass #delete this line and replace with your code here
+        best_decrypt = 0
+        result = None
+        for perm in get_permutations(VOWELS_LOWER):
+            tranposed_dict = self.build_transpose_dict(perm)
+            decrypt_attempt = SubMessage(self.apply_transpose(tranposed_dict))
+            if len(decrypt_attempt.get_valid_words()) > best_decrypt:
+                best_decrypt = len(decrypt_attempt.get_valid_words())
+                result = decrypt_attempt.get_message_text()
+        return result
     
 
 if __name__ == '__main__':
