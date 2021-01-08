@@ -70,7 +70,9 @@ class SubMessage(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        WORDLIST = load_words(WORDLIST_FILENAME)
+        self.message_text = text
+        self.valid_words = [word for word in text.split() if is_word(WORDLIST, word)]
     
     def get_message_text(self):
         '''
@@ -78,7 +80,7 @@ class SubMessage(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +89,7 @@ class SubMessage(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words[:]
                 
     def build_transpose_dict(self, vowels_permutation):
         '''
@@ -108,8 +110,13 @@ class SubMessage(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        
-        pass #delete this line and replace with your code here
+        mapping = {}
+        for index, vowel in enumerate(vowels_permutation):
+            if vowel.isupper():
+                mapping[VOWELS_UPPER[index]] = vowels_permutation[index]
+            elif vowel.islower():
+                mapping[VOWELS_LOWER[index]] = vowels_permutation[index]
+        return mapping
     
     def apply_transpose(self, transpose_dict):
         '''
@@ -118,8 +125,7 @@ class SubMessage(object):
         Returns: an encrypted version of the message text, based 
         on the dictionary
         '''
-        
-        pass #delete this line and replace with your code here
+        return "".join([transpose_dict.get(letter, letter) for letter in self.message_text])
         
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
