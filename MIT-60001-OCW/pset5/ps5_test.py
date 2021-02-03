@@ -243,6 +243,21 @@ class ProblemSet5(unittest.TestCase):
         self.assertTrue(nob in filtered_stories)
         self.assertEqual(2, len(filtered_stories))
 
+    def test9PhraseTriggerMethods(self):
+        test1 = PhraseTrigger("purple cow")
+
+        self.assertTrue(test1.is_phrase_in('PURPLE COW'))
+        self.assertTrue(test1.is_phrase_in('The purple cow is soft and cuddly.'))
+        self.assertTrue(test1.is_phrase_in('The farmer owns a really PURPLE cow.'))
+        self.assertTrue(test1.is_phrase_in('Purple!!! Cow!!!'))
+        self.assertTrue(test1.is_phrase_in('purple@#$%\cow'))
+        self.assertTrue(test1.is_phrase_in('Did you see a purple cow?'))
+        self.assertFalse(test1.is_phrase_in("Purple cows are cool!"))
+        self.assertFalse(test1.is_phrase_in("The purple blob over there is a cow."))
+        self.assertFalse(test1.is_phrase_in("How now brown cow."))
+        self.assertFalse(test1.is_phrase_in("Cow!!! Purple!!!"))
+        self.assertFalse(test1.is_phrase_in("purplecowpurplecowpurplecow"))
+
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
