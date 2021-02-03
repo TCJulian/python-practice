@@ -93,20 +93,29 @@ class Trigger(object):
 # PHRASE TRIGGERS
 
 # Problem 2
-class PhaseTrigger(Trigger):
+class PhraseTrigger(Trigger):
     def __init__(self, phrase):
-        self.phrase = phrase.lower()
+        self.phrase = phrase.lower().strip()
     def is_phrase_in(self, text):
+        """
+        Returns True if phrase is found in the provided text.
+        Match must be exact, and cannot be preceded of succeeded by
+        any alphanumeric character. Returns False otherwise.
+        """
+        match = False
         text = text.lower()
-        for i in text[:]:
-            if i in string.punctutation:
-                text.replace(i, '')
-        text = text.split()
-        text = " ".join(text)
-        if self.phrase in text:
-            return True
-        else:
-            return False
+        for i in text:
+            if i in string.punctuation:
+                text = text.replace(i, ' ')
+        text = " ".join(text.split())
+        pos = text.find(self.phrase)
+        if pos != -1:
+            if pos == 0 or not text[pos-1].isalnum():
+                if len(text) == pos + len(self.phrase):
+                    match = True
+                elif not text[pos + len(self.phrase)].isalnum():
+                    match = True
+        return match
 
 # Problem 3
 # TODO: TitleTrigger
