@@ -118,7 +118,15 @@ class PhraseTrigger(Trigger):
         return match
 
 # Problem 3
-# TODO: TitleTrigger
+class TitleTrigger(PhraseTrigger):
+    def __init__(self, phrase):
+        PhraseTrigger.__init__(self, phrase)
+    def evaluate(self, story):
+        """
+        Returns True if an alert should be generated
+        for the given news item based on the title, or False otherwise.
+        """
+        return self.is_phrase_in(story.get_title())
 
 # Problem 4
 # TODO: DescriptionTrigger
