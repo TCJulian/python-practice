@@ -135,7 +135,7 @@ class DescriptionTrigger(PhraseTrigger):
     def evaluate(self, story):
         """
         Returns True if an alert should be generated
-        for the given news item based on the title, or False otherwise.
+        for the given news item based on the description, or False otherwise.
         """
         return self.is_phrase_in(story.get_description())
 
