@@ -182,7 +182,16 @@ class AfterTrigger(TimeTrigger):
 # COMPOSITE TRIGGERS
 
 # Problem 7
-# TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, trigger):
+        self.trigger = trigger
+    def evaluate(self, story):
+        """
+        Take in a trigger object.
+        Returns True alert should not be generated for a trigger,
+        or False otherwise.
+        """
+        return not self.trigger.evaluate(story)
 
 # Problem 8
 # TODO: AndTrigger
