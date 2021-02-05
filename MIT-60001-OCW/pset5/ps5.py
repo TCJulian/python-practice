@@ -144,14 +144,40 @@ class DescriptionTrigger(PhraseTrigger):
 # Problem 5
 class TimeTrigger(Trigger):
     def __init__(self, time):
-        self.time = datetime.strptime(time, "%d %b %Y %H:%M:%S")
+        self.time_trigger = datetime.strptime(time, "%d %b %Y %H:%M:%S")
+        self.time_trigger = self.time_trigger.replace(tzinfo=pytz.timezone("EST"))
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
 
 # Problem 6
-# TODO: BeforeTrigger and AfterTrigger
+class BeforeTrigger(TimeTrigger):
+    def __init__(self, time):
+        TimeTrigger.__init__(self, time)
+    def evaluate(self, story):
+        """
+        Returns True if an alert should be generated
+        for the given news item if the pubdate is before the provided time,
+        or False otherwise.
+        """
+        try:
+            return story.get_pubdate() < self.time_trigger
+        except TypeError:
+            return story.get_pubdate() < self.time_trigger.replace(tzinfo=None)
 
+class AfterTrigger(TimeTrigger):
+    def __init__(self, time):
+        TimeTrigger.__init__(self, time)
+    def evaluate(self, story):
+        """
+        Returns True if an alert should be generated
+        for the given news item if the pubdate is after the provided time,
+        or False otherwise.
+        """
+        try:
+            return story.get_pubdate() > self.time_trigger
+        except TypeError:
+            return story.get_pubdate() > self.time_trigger.replace(tzinfo=None)
 
 # COMPOSITE TRIGGERS
 
