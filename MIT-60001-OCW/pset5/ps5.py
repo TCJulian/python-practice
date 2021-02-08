@@ -273,15 +273,15 @@ def read_trigger_config(filename):
     }
     for command in lines:
         command = command.split(',')
+        c_type = command[1]
         if command[0] == "ADD":
             for i in command[1:]:
                 return_triggers.append(trigger_list[i])
-        else:
-            trigger_list[command[0]] = trigger_dict[command[1]](*command[2:]) # TODO Need to break out inputs for each trigger 
-
-    #print(lines) # for now, print it so you see what it contains!
-    #print(trigger_list)
-    #print(return_triggers)
+        elif c_type in ["TITLE", "DESCRIPTION", "AFTER", "BEFORE"]:
+            trigger_list[command[0]] = trigger_dict[c_type](*command[2:])
+        elif c_type in ["NOT", "AND", "OR"]:
+            packed = [trigger_list[c] for c in command[2:]]
+            trigger_list[command[0]] = trigger_dict[c_type](*packed)
     return return_triggers
 
 
