@@ -17,15 +17,24 @@ import random
 def check_guess(guess, answer):
     """
     Takes an integer "guess" and compares its digit placement and value against
-    each digit in "answer". Both inputs must be integers.
+    each digit in "answer". Both inputs must be strings.
 
-    Returns a tuple with the number of correctly guessed integers in the 
-    right place (cows), and the number of correctly guessed in the wrong place 
-    (bulls).
+    Returns a tuple with the number of correctly guessed integers in the
+    right place (cows), and the number of correctly guessed integers in the
+     wrong place (bulls).
     """
+    cows = 0
+    bulls = 0
+    for pos, char in enumerate(guess):
+        if char == answer[pos]:
+            cows += 1
+        elif char in answer:
+            bulls += 1
+    return (cows, bulls)
 
 def play_CowsAndBulls():
-    # TODO:
+    # TODO
+    pass
 
 if __name__ == "__main__":
-play_CowsAndBulls()
+    play_CowsAndBulls()
