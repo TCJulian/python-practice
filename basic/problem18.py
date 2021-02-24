@@ -33,8 +33,15 @@ def check_guess(guess, answer):
     return (cows, bulls)
 
 def play_CowsAndBulls():
-    # TODO
-    pass
+    # TODO:
+    # Generate random number
+    # Track number of guesses
+    # Intro text
+    # Start game loop and Collect user guess
+        # Validate if guess is correct and print result.
+        # If wrong, increase guess count by one and repeat loop
+        # If right, increase guess by one and exit loop
+    # Congraulate user, show score, and end game
 
 if __name__ == "__main__":
     play_CowsAndBulls()
