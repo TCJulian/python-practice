@@ -13,6 +13,7 @@
 #
 # -------------------------------------------------------------------
 import random
+import sys
 
 def check_guess(guess, answer):
     """
@@ -48,7 +49,7 @@ def play_CowsAndBulls():
         while True:
             guess = input()
             if guess == "q":
-                exit()
+                sys.exit("Quitting Cows and Bulls game...")
             elif len(guess) != 4 or not guess.isnumeric():
                 print("Your guess is not a valid number. Please input a 4 digit integer.")
             else:
