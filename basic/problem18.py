@@ -35,13 +35,25 @@ def check_guess(guess, answer):
 def play_CowsAndBulls():
     # TODO:
     # Generate random number
+    answer = str(random.randint(1000, 9999))
     # Track number of guesses
+    guesses = 0
     # Intro text
+    print("Welcome to the Cows and Bulls Game!")
+    print("Enter a number:")
     # Start game loop and Collect user guess
+    while True:
+        guess = input()
         # Validate if guess is correct and print result.
+        result = check_guess(guess, answer)
+        print(f"{result[0]} cow(s), {result[1]} bull(s)")
         # If wrong, increase guess count by one and repeat loop
         # If right, increase guess by one and exit loop
-    # Congraulate user, show score, and end game
+        guesses += 1
+        if result[0] == 4:
+            break
+    # Congradulate user, show score, and end game
+    print(f"You have found the correct number in {guesses} guesses! It was {answer}.")
 
 if __name__ == "__main__":
     play_CowsAndBulls()
