@@ -45,7 +45,14 @@ def play_CowsAndBulls():
     print("Enter a number:")
     # Start game loop and Collect user guess
     while True:
-        guess = input()
+        while True:
+            guess = input()
+            if guess == "q":
+                exit()
+            elif len(guess) != 4 or not guess.isnumeric():
+                print("Your guess is not a valid number. Please input a 4 digit integer.")
+            else:
+                break
         # Validate if guess is correct and print result.
         result = check_guess(guess, answer)
         print(f"{result[0]} cow(s), {result[1]} bull(s)")
