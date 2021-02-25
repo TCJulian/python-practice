@@ -15,3 +15,15 @@ This will just print the full text of the article to the screen. It will not
 make it easy to read, so next exercise we will learn how to write this text
 to a .txt file.
 """
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get("http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture")
+r_html = r.text
+
+soup = BeautifulSoup(r_html, 'html.parser')
+text = soup.find_all("p")
+for i in text:
+    content = i.string
+    if content:
+        print(content)
