@@ -12,7 +12,27 @@ Extra:
 Use binary search.
 """
 def binary_search(numbers, search_num):
-    pass
+    """
+    Uses binary search to search for a number in an ordered list of numbers.
+
+    Input: ordered list (must be a list of integers), and the number to be
+    searched (must be an integer).
+
+    Output: A boolean. True if integer found in list, False otherwise. If
+    invalid inputs are provided, prints out an error message and returns None.
+    """
+    try:
+        assert isinstance(numbers, list)
+        for i in numbers:
+            assert isinstance(i, int)
+    except AssertionError:
+        print("Invalid number list.")
+        return None
+    try:
+        assert isinstance(search_num, int)
+    except AssertionError:
+        print("Invalid search number.")
+        return None
 
 if __name__ == "__main__":
     print()
@@ -76,11 +96,11 @@ if __name__ == "__main__":
     print('Search number: 97')
     print('List: [1-100]')
     print('Expected outcome: True')
-    print(f'Actual outcome: {binary_search([range(1,101)], 97)}')
+    print(f'Actual outcome: {binary_search(list(range(1,101)), 97)}')
 
     print()
     print('Test 10')
     print('Search number: 1231')
     print('List: [1-10000]')
     print('Expected outcome: True')
-    print(f'Actual outcome: {binary_search([range(1,10001)], 1231)}')
+    print(f'Actual outcome: {binary_search(list(range(1,10001)), 1231)}')
