@@ -21,6 +21,20 @@ def binary_search(numbers, search_num):
     Output: A boolean. True if integer found in list, False otherwise. If
     invalid inputs are provided, prints out an error message and returns None.
     """
+    def bin_helper(numbers, search_num):
+        if len(numbers) == 0:
+            return False
+        if len(numbers) == 1:
+            return numbers[0] == search_num
+
+        mid = (len(numbers) - 1) // 2
+        if numbers[mid] == search_num:
+            return True
+        if search_num > numbers[mid]:
+            return bin_helper(numbers[mid+1:], search_num)
+        if search_num < numbers[mid]:
+            return bin_helper(numbers[:mid], search_num)
+
     try:
         assert isinstance(numbers, list)
         for i in numbers:
@@ -33,6 +47,8 @@ def binary_search(numbers, search_num):
     except AssertionError:
         print("Invalid search number.")
         return None
+
+    return bin_helper(numbers, search_num)
 
 if __name__ == "__main__":
     print()
