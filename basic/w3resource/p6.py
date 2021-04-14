@@ -11,8 +11,10 @@ Output :
 List : ['3', ' 5', ' 7', ' 23']
 Tuple : ('3', ' 5', ' 7', ' 23')
 """
-def main():
-    pass
+def main(data):
+    data = data.replace(" ", "").split(",")
+    print("List:", data)
+    print("Tuple:", tuple(data))
 
 if __name__ == "__main__":
-    main()
+    main("3, 5, 7, 23")
