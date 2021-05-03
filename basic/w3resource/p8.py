@@ -7,3 +7,6 @@ list.
 
 color_list = ["Red","Green","White" ,"Black"]
 """
+color_list = ["Red","Green","White" ,"Black"]
+print("First color in list:", color_list[0])
+print("Last color in list:", color_list[-1])
