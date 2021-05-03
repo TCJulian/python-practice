@@ -8,3 +8,9 @@ extension of that.
 Sample filename : abc.java
 Output : java
 """
+filename = input('Enter your file name: ')
+period = filename.rfind(".")
+if period != -1:
+    print(filename[period+1:])
+else:
+    print("Not a valid filename. Please try again.")
