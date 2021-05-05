@@ -10,3 +10,8 @@ Expected Result :
 abs(number) -> number
 Return the absolute value of the argument.
 """
+from inspect import getargspec
+
+func = abs
+print(f"{func.__name__}()")
+print(func.__doc__)
